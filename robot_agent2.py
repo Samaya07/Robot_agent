@@ -86,7 +86,7 @@ array=[[131,129,127,125,123,121,119, 0   , 0  ,  0],
        [0  ,0  , 0 ,  0, 0 , 19, 20, 0   , 21 , 115],
        [0  ,0  , 0 , 22, 0 , 23, 24, 0   , 25 ,  113],
        [0  ,0  ,26 , 27, 0 , 28, 29, 0   , 30 ,   0],
-       [31 ,32 ,33 , 34, 35, 36, 37 ,0   , 38 ,   0],
+       [31 ,32 ,33 , 34, 35, 36, 37 ,40   , 38 ,   0],
        [1  ,2  ,101,103,105,107, 109, 111, 0  ,   0]]
 # array that records the visited places in the environment.
 # the rooms are all marked visited because the agent doesnt have to go inside the rooms to reach a room.
