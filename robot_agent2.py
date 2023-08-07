@@ -1,4 +1,4 @@
-def direction(x,y,m,n,up,down,left,right):
+def direction(x,y,m,n,up,down,left,right): # function that returns the possible direction for the agent
     if x<m-1:
         down=True
     if x>0:
@@ -9,7 +9,7 @@ def direction(x,y,m,n,up,down,left,right):
         left=True
     return up,down,left,right
 
-def set_valid(x,y,up,down,left,right,up_valid,down_valid,left_valid,right_valid):
+def set_valid(x,y,up,down,left,right,up_valid,down_valid,left_valid,right_valid): # function that returns the valid directions
     if up==True:
         if array[x-1][y]!=0 :
             up_valid=True
@@ -24,7 +24,7 @@ def set_valid(x,y,up,down,left,right,up_valid,down_valid,left_valid,right_valid)
             right_valid=True
     return up_valid,down_valid,left_valid,right_valid
 
-def traverse(l,k,array,x,y,xd,yd,visited,m,n,up,down,left,right,up_valid,down_valid,left_valid,right_valid):
+def traverse(l,k,array,x,y,xd,yd,visited,m,n,up,down,left,right,up_valid,down_valid,left_valid,right_valid): # we use this function to recursively traverse through the environment and backtrack
     up,down,left,right=direction(x,y,m,n,up=False,down=False,left=False,right=False)
     if(xd-x<0):
         down=False
@@ -41,7 +41,7 @@ def traverse(l,k,array,x,y,xd,yd,visited,m,n,up,down,left,right,up_valid,down_va
             visited[x-1][y]=True
             l.append(array[x-1][y])
             k=traverse(l,k,array,x-1,y,xd,yd,visited,m,n,up,down,left,right,up_valid,down_valid,left_valid,right_valid)
-            del l[-1]
+            del l[-1] # delete the last element while backtracking
 
     if down_valid==True:
         if x==xd and y==yd:
@@ -80,27 +80,30 @@ def traverse(l,k,array,x,y,xd,yd,visited,m,n,up,down,left,right,up_valid,down_va
             del l[-1]
     visited[x][y]=False
     return k
-
+# the environment
 array=[[131,129,127,125,123,121,119, 0   , 0  ,  0],
-       [10 ,11 ,12 ,13 ,14 ,15 , 16, 17  , 39 ,117],
+       [10 ,11 ,12 ,13 ,14 ,15 , 16, 17  , 39 ,117], 
        [0  ,0  , 0 ,  0, 0 , 19, 20, 0   , 21 , 115],
        [0  ,0  , 0 , 22, 0 , 23, 24, 0   , 25 ,  113],
        [0  ,0  ,26 , 27, 0 , 28, 29, 0   , 30 ,   0],
        [31 ,32 ,33 , 34, 35, 36, 37 ,0   , 38 ,   0],
        [1  ,2  ,101,103,105,107, 109, 111, 0  ,   0]]
+# array that records the visited places in the environment.
+# the rooms are all marked visited because the agent doesnt have to go inside the rooms to reach a room.
 visited=[[True,True,True,True,True,True,True,False,False, False],
+         [False,False,False,False,False,False,False,False,False,True],
+         [False,False,False,False,False,False,False,False,False,True],
+         [False,False,False,False,False,False,False,False,False,True],
          [False,False,False,False,False,False,False,False,False,False],
          [False,False,False,False,False,False,False,False,False,False],
-         [False,False,False,False,False,False,False,False,False,False],
-         [False,False,False,False,False,False,False,False,False,False],
-         [True,False,False,False,False,False,False,False,False,False],
-         [False,False,False,False,False,False,False,False,False,False]]
+         [True,True,True,True,True,True,True,True,True,True]]
 
 m=7
 n=10
 agent_loc=[5,0]
 x=agent_loc[0]
 y=agent_loc[1]
+visited[x][y]=True
 dest_loc=[0,5]
 xd=dest_loc[0]
 yd=dest_loc[1]
